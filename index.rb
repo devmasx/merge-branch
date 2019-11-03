@@ -1,3 +1,4 @@
+require 'json'
 require 'octokit'
 
 @event = JSON.parse(File.read(ENV['GITHUB_EVENT_PATH']))
