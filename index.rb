@@ -2,7 +2,7 @@ require 'json'
 require 'octokit'
 
 @event = JSON.parse(File.read(ENV['GITHUB_EVENT_PATH']))
-puts @event
+puts @event&.to_json
 
 @repository = ENV['GITHUB_REPOSITORY']
 @base_brach = ENV['INPUT_BASE_BRACH'] || 'develop'
