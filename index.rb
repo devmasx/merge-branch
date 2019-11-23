@@ -9,6 +9,9 @@ puts @event
 @head_to_merge = ENV['GITHUB_SHA'] # or brach name
 @github_token = ENV['GITHUB_TOKEN']
 
-@client = Octokit::Client.new(access_token: @github_token)
+def merge_to(base_branch_name)
+  @client = Octokit::Client.new(access_token: @github_token)
+  @client.merge(@repository, base_branch_name, @head_to_merge)
+end
 
-@client.merge(@repository, @base_brach, @head_to_merge)
+merge_to(@base_brach)
