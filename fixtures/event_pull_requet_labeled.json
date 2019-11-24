@@ -1,0 +1,12 @@
+{
+  "action": "labeled",
+  "label": {
+    "color": "d73a4a",
+    "default": true,
+    "description": "Something isn't working",
+    "id": 1694345561,
+    "name": "bug",
+    "node_id": "MDU6TGFiZWwxNjk0MzQ1NTYx",
+    "url": "https://api.github.com/repos/devmasxtest/test-repository/labels/bug"
+  }
+}
