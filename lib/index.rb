@@ -33,8 +33,8 @@ def run
     return 'Skip'
   end
 
-  adapter.base_branch.tap do |base_branch_name|
-    raise 'Could not find branch name' unless base_branch_name
+  adapter.base_branch.tap do |base_branch|
+    raise 'Could not find branch name' unless base_branch
 
     merge_to(base_branch)
   end
