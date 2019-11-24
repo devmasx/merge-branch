@@ -23,7 +23,7 @@ def base_branch
     if comment_message && comment_message =~ COMMENT_REGEXP
       match_branch_name(comment_message)
     else
-      ENV['INPUT_BASE_BRACH'] || 'develop'
+      ENV['INPUT_BASE_BRACH']
     end
   raise unless base_branch_name
 
