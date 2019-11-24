@@ -27,6 +27,7 @@ def base_branch
     end
   raise unless base_branch_name
 
+  base_branch_name
 rescue StandardError => e
   raise "Could not find branch name, #{e.message}"
 end
