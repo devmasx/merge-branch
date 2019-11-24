@@ -10,6 +10,7 @@ COMMAND_NAME = "/merge"
 @head_to_merge = ENV['GITHUB_SHA'] # or brach name
 @repository = ENV['GITHUB_REPOSITORY']
 @github_token = ENV['GITHUB_TOKEN']
+@base_branch = ENV['INPUT_BASE_BRANCH']
 
 def match_branch_name(str)
   arr = str.split(/\s+/)
@@ -23,7 +24,7 @@ def base_branch
     if comment_message && comment_message =~ COMMENT_REGEXP
       match_branch_name(comment_message)
     else
-      ENV['INPUT_BASE_BRACH']
+      @base_branch
     end
   raise unless base_branch_name
 
