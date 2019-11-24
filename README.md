@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Merge to develop
+      - name: Merge by labeled
         uses: devmasxtest/merge-command-action@master
         with:
           type: labeled
