@@ -2,9 +2,9 @@
 
 ### On labeled
 
-Merge PR branch using github labeld.
+Merge PR branch using github labels.
 
-You can set label in a PR and this action merge the PR branch to other branch, useful for develop branch or staging enviroments.
+When you set a label in a PR this action can merge the PR branch to other branch, useful for develop branch or staging enviroments.
 
 ![PR](./screenshots/pr.png)
 ![Checker](./screenshots/checker.png)
