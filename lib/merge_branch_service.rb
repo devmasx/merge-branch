@@ -7,12 +7,12 @@ class MergeBrachService
     @inputs = inputs
   end
 
-  def ensure_base_branch
+  def ensure_target_branch
     adapter = build_adapter
     return nil unless adapter.valid?
 
-    adapter.base_branch.tap do |base_branch|
-      raise 'Could not find branch name' unless base_branch || base_branch.empty?
+    adapter.target_branch.tap do |target_branch|
+      raise 'Could not find branch name' unless target_branch || target_branch.empty?
     end
   end
 
@@ -21,9 +21,9 @@ class MergeBrachService
   def build_adapter
     case @inputs[:type]
     when 'push'
-      PushAdapter.new(@inputs[:event], @inputs[:base_branch])
+      PushAdapter.new(@inputs[:event], @inputs[:target_branch])
     when 'labeled'
-      LabeledAdapter.new(@inputs[:event], @inputs[:base_branch], @inputs[:label_name])
+      LabeledAdapter.new(@inputs[:event], @inputs[:target_branch], @inputs[:label_name])
     end
   end
 end

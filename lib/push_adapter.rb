@@ -1,14 +1,14 @@
 class PushAdapter
-  def initialize(github_event, base_branch)
+  def initialize(github_event, target_branch)
     @event = github_event
-    @base_branch = base_branch
+    @target_branch = target_branch
   end
 
   def valid?
     true
   end
 
-  def base_branch
-    @base_branch
+  def target_branch
+    @target_branch
   end
 end

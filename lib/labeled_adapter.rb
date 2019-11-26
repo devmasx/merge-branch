@@ -1,7 +1,7 @@
 class LabeledAdapter
-  def initialize(github_event, base_branch, label_name)
+  def initialize(github_event, target_branch, label_name)
     @event = github_event
-    @base_branch = base_branch
+    @target_branch = target_branch
     @label_name = label_name
   end
 
@@ -10,7 +10,7 @@ class LabeledAdapter
       @event&.dig('label', 'name') == @label_name
   end
 
-  def base_branch
-    @base_branch
+  def target_branch
+    @target_branch
   end
 end

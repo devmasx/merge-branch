@@ -6,19 +6,19 @@ require_relative './merge_branch_service'
 @head_to_merge = ENV['GITHUB_SHA'] # or brach name
 @repository = ENV['GITHUB_REPOSITORY']
 @github_token = ENV['GITHUB_TOKEN']
-@base_branch = ENV['INPUT_BASE_BRANCH']
+@target_branch = ENV['INPUT_TARGET_BRANCH']
 @label_name = ENV['INPUT_LABEL_NAME']
 @type = ENV['INPUT_TYPE'] || 'labeled' # labeled | comment | push
 
 service = MergeBrachService.new(
-  event: @event, type: @type, base_branch: @base_branch, label_name: @label_name
+  event: @event, type: @type, target_branch: @target_branch, label_name: @label_name
 )
-service_base_branch = service.ensure_base_branch
+service_target_branch = service.ensure_target_branch
 
-if service_base_branch
+if service_target_branch
   @client = Octokit::Client.new(access_token: @github_token)
-  @client.merge(@repository, service_base_branch, @head_to_merge)
-  puts "Finish merge brach #{service_base_branch}"
+  @client.merge(@repository, service_target_branch, @head_to_merge)
+  puts "Finish merge brach #{service_target_branch}"
 else
   puts 'Skip'
 end
