@@ -1,0 +1,9 @@
+name: 'Merge branch'
+description: 'A GitHub Action that merge PR branch to other branchs'
+author: Miguel Savignano
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'git-merge'
+  color: 'purple'
