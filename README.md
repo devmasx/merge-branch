@@ -1,20 +1,10 @@
 ## Merge branch
 
-```yaml
-name: Merge branch
-on: [push]
-jobs:
-  merge-branch:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - name: Merge to develop
-        uses: devmasxtest/merge-command-action@master
-        with:
-          base_branch: develop
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-```
+### On labeled
+
+Merge PR branch using github labeld.
+
+You can set label in a PR and this actinos merge the PR branch to other branch, usefult for develop branch or staging enviroments.
 
 ```yaml
 name: Merge branch
@@ -27,11 +17,10 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Merge by labeled
-        uses: devmasxtest/merge-command-action@master
+        uses: devmasx/merge-branch@master
         with:
-          type: labeled
-          label_name: "merged in develop"
-          base_branch: "develop"
+          label_name: 'merged in develop'
+          base_branch: 'develop'
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 ```
