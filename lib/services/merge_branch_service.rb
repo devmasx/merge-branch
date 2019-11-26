@@ -1,5 +1,5 @@
-require_relative './labeled_adapter'
-require_relative './push_adapter'
+require_relative '../adapters/labeled_adapter'
+require_relative '../adapters/push_adapter'
 
 class MergeBrachService
 

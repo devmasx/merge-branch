@@ -1,4 +1,4 @@
-require_relative '../lib/merge_branch_service'
+require_relative '../lib/services/merge_branch_service'
 
 describe MergeBrachService do
   context "with push" do

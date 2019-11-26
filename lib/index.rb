@@ -1,6 +1,6 @@
 require 'json'
 require 'octokit'
-require_relative './merge_branch_service'
+require_relative './services/merge_branch_service'
 
 @event = JSON.parse(File.read(ENV['GITHUB_EVENT_PATH']))
 @head_to_merge = ENV['GITHUB_SHA'] # or brach name
