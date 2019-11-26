@@ -1,10 +1,13 @@
-## Merge branch
+## Merge branch action
 
 ### On labeled
 
 Merge PR branch using github labeld.
 
 You can set label in a PR and this actinos merge the PR branch to other branch, usefult for develop branch or staging enviroments.
+
+![PR](./screenshots/pr.png)
+![Checker](./screenshots/checker.png)
 
 ```yaml
 name: Merge branch
