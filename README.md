@@ -4,7 +4,7 @@
 
 Merge PR branch using github labeld.
 
-You can set label in a PR and this actinos merge the PR branch to other branch, usefult for develop branch or staging enviroments.
+You can set label in a PR and this action merge the PR branch to other branch, useful for develop branch or staging enviroments.
 
 ![PR](./screenshots/pr.png)
 ![Checker](./screenshots/checker.png)
@@ -23,7 +23,7 @@ jobs:
         uses: devmasx/merge-branch@master
         with:
           label_name: 'merged in develop'
-          base_branch: 'develop'
+          target_branch: 'develop'
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 ```
