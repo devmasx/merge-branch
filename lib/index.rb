@@ -8,12 +8,12 @@ require_relative './merge_branch_service'
 @github_token = ENV['GITHUB_TOKEN']
 @base_branch = ENV['INPUT_BASE_BRANCH']
 @label_name = ENV['INPUT_LABEL_NAME']
-@type = ENV['INPUT_TYPE'] || 'push' # labeled | push
+@type = ENV['INPUT_TYPE'] || 'labeled' # labeled | comment | push
 
 service = MergeBrachService.new(
   event: @event, type: @type, base_branch: @base_branch, label_name: @label_name
 )
-service_base_branch = service.base_branch
+service_base_branch = service.ensure_base_branch
 
 if service_base_branch
   @client = Octokit::Client.new(access_token: @github_token)

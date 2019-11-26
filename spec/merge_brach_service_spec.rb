@@ -9,7 +9,7 @@ describe MergeBrachService do
 
     it "#base_branch" do
       service = MergeBrachService.new(inputs)
-      expect(service.base_branch).to eq('develop')
+      expect(service.ensure_base_branch).to eq('develop')
     end
   end
 
@@ -24,7 +24,7 @@ describe MergeBrachService do
     context "match label" do
       it "#base_branch" do
         service = MergeBrachService.new(inputs)
-        expect(service.base_branch).to eq('develop')
+        expect(service.ensure_base_branch).to eq('develop')
       end
     end
 
@@ -33,7 +33,7 @@ describe MergeBrachService do
 
       it "#base_branch" do
         service = MergeBrachService.new(inputs)
-        expect(service.base_branch).to be_nil
+        expect(service.ensure_base_branch).to be_nil
       end
     end
   end

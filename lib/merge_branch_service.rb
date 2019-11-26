@@ -7,7 +7,7 @@ class MergeBrachService
     @inputs = inputs
   end
 
-  def base_branch
+  def ensure_base_branch
     adapter = build_adapter
     return nil unless adapter.valid?
 
