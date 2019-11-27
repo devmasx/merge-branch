@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Merge by labeled
-        uses: devmasx/merge-branch@master
+        uses: devmasx/merge-branch@v1.0.0
         with:
           label_name: 'merged in develop'
           target_branch: 'develop'
