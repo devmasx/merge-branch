@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Merge by labeled
+      - name: Merge to uat branch
         uses: devmasx/merge-branch@v1.1.0
         with:
           type: now
