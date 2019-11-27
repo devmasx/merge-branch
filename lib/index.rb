@@ -8,7 +8,7 @@ require_relative './services/merge_branch_service'
 @github_token = ENV['GITHUB_TOKEN']
 @target_branch = ENV['INPUT_TARGET_BRANCH']
 @label_name = ENV['INPUT_LABEL_NAME']
-@type = ENV['INPUT_TYPE'] || 'labeled' # labeled | comment | push
+@type = ENV['INPUT_TYPE'] || 'labeled' # labeled | comment | now
 
 service = MergeBrachService.new(
   event: @event, type: @type, target_branch: @target_branch, label_name: @label_name

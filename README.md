@@ -20,10 +20,32 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Merge by labeled
-        uses: devmasx/merge-branch@v1.0.0
+        uses: devmasx/merge-branch@v1.1.0
         with:
           label_name: 'merged in develop'
           target_branch: 'develop'
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+```
+
+## On any github event
+
+```yaml
+name: Merge staging branch to uat
+on:
+  push:
+    branches:
+      - 'staging'
+jobs:
+  merge-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Merge to uat branch
+        uses: devmasx/merge-branch@v1.1.0
+        with:
+          type: now
+          target_branch: 'uat'
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 ```

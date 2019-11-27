@@ -1,10 +1,21 @@
 require_relative '../lib/services/merge_branch_service'
 
 describe MergeBrachService do
+  context "with invalid type" do
+    let(:inputs) {
+      { type: 'invalid_type', event: {}, target_branch: 'develop' }
+    }
+
+    it "#target_branch" do
+      service = MergeBrachService.new(inputs)
+      expect{ service.ensure_target_branch }.to raise_error()
+    end
+  end
+
   context "with push" do
     let(:target_branch) { 'develop' }
     let(:inputs) {
-      { type: 'push', event: {}, target_branch: target_branch }
+      { type: 'now', event: {}, target_branch: target_branch }
     }
 
     it "#target_branch" do
@@ -18,7 +29,7 @@ describe MergeBrachService do
     let(:target_branch) { 'develop' }
     let(:event) { { 'action' => 'labeled', 'label' => { 'name' => label_name } } }
     let(:inputs) {
-      { type: 'labeled', event: event, target_branch: target_branch, label_name: label_name }
+      { event: event, target_branch: target_branch, label_name: label_name }
     }
 
     context "match label" do

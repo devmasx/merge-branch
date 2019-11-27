@@ -1,10 +1,11 @@
 require_relative '../adapters/labeled_adapter'
-require_relative '../adapters/push_adapter'
+require_relative '../adapters/now_adapter'
 
 class MergeBrachService
 
   def initialize(inputs)
     @inputs = inputs
+    @inputs[:type] = 'labeled' unless @inputs[:type]
   end
 
   def ensure_target_branch
@@ -20,10 +21,12 @@ class MergeBrachService
 
   def build_adapter
     case @inputs[:type]
-    when 'push'
-      PushAdapter.new(@inputs[:event], @inputs[:target_branch])
+    when 'now'
+      NowAdapter.new(@inputs[:event], @inputs[:target_branch])
     when 'labeled'
       LabeledAdapter.new(@inputs[:event], @inputs[:target_branch], @inputs[:label_name])
+    else
+      raise "Invalid type #{@inputs[:type]}"
     end
   end
 end

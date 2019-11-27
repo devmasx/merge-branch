@@ -1,6 +1,17 @@
 name: 'Merge branch'
 description: 'A GitHub Action that merge PR branch to other branchs'
 author: Miguel Savignano
+inputs:
+  type:
+    type: 'labeled | now'
+    required: false
+    default: 'labeled'
+  label_name:
+    description: 'PR Label name'
+    required: false
+  target_branch:
+    description: 'The name of target branch to merge'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
