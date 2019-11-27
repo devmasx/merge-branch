@@ -1,4 +1,4 @@
-class PushAdapter
+class NowAdapter
   def initialize(github_event, target_branch)
     @event = github_event
     @target_branch = target_branch
