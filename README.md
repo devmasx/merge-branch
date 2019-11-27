@@ -2,9 +2,9 @@
 
 ### On labeled
 
-Merge PR branch using github labels.
+Merge pull request branch using GitHub labels.
 
-When you set a label in a PR this action can merge the PR branch to other branch, useful for develop branch or staging environments.
+When you set a label in a pull request this action can merge the pull request branch to other branch, useful for develop branch or staging environments.
 
 ![PR](./screenshots/pr.png)
 ![Checker](./screenshots/checker.png)
@@ -28,7 +28,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 ```
 
-## On any github event
+## On any GitHub event
 
 ```yaml
 name: Merge staging branch to uat
