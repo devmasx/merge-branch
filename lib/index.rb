@@ -10,6 +10,7 @@ require_relative './services/merge_branch_service'
 @label_name = ENV['INPUT_LABEL_NAME']
 @type = ENV['INPUT_TYPE'] || 'labeled' # labeled | comment | now
 
+puts "#{@repository} #{@head_to_merge} #{@target_branch} #{@label_name} #{@type}"
 service = MergeBrachService.new(
   event: @event, type: @type, target_branch: @target_branch, label_name: @label_name
 )
