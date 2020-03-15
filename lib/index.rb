@@ -3,14 +3,14 @@ require 'octokit'
 require_relative './services/merge_branch_service'
 
 @event = JSON.parse(File.read(ENV['GITHUB_EVENT_PATH']))
-@head_to_merge = ENV['GITHUB_SHA'] # or brach name
+@head_to_merge = ENV['GITHUB_REF'] # or brach name
 @repository = ENV['GITHUB_REPOSITORY']
 @github_token = ENV['GITHUB_TOKEN']
 @target_branch = ENV['INPUT_TARGET_BRANCH']
 @label_name = ENV['INPUT_LABEL_NAME']
 @type = ENV['INPUT_TYPE'] || 'labeled' # labeled | comment | now
 
-puts "#{@repository} #{@head_to_merge} #{@target_branch} #{@label_name} #{@type}"
+puts "#{@repository} #{ENV['GITHUB_SHA']} #{ENV['GITHUB_REF']} #{@target_branch} #{@label_name} #{@type}"
 service = MergeBrachService.new(
   event: @event, type: @type, target_branch: @target_branch, label_name: @label_name
 )
