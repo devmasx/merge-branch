@@ -17,8 +17,9 @@ service = MergeBrachService.new(
 service_target_branch = service.ensure_target_branch
 
 if service_target_branch
+  puts "**** #{@repository}, #{@target_branch} #{@head_to_merge}"
   @client = Octokit::Client.new(access_token: @github_token)
-  @client.merge(@repository, service_target_branch, @head_to_merge)
+  @client.merge(@repository, @target_branch, @head_to_merge)
   puts "Finish merge brach to #{service_target_branch}"
 else
   puts 'Skip'
