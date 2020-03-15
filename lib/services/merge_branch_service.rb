@@ -21,7 +21,7 @@ class MergeBrachService
     case inputs[:type]
     when TYPE_LABELED
       labeled_valid?
-    when 'now'
+    when TYPE_NOW
       true
     end
   end
