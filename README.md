@@ -31,11 +31,11 @@ jobs:
 ## On any GitHub event
 
 ```yaml
-name: Merge staging branch to uat
+name: Merge any release branch to uat
 on:
   push:
     branches:
-      - 'staging'
+      - 'release/*'
 jobs:
   merge-branch:
     runs-on: ubuntu-latest
@@ -51,7 +51,7 @@ jobs:
 ```
 
 ```yaml
-name: Sync multiple branch
+name: Sync multiple branches
 on:
   push:
     branches:
