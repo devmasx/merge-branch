@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Merge by labeled
-        uses: devmasx/merge-branch@v1.1.0
+        uses: devmasx/merge-branch@v1.2.0
         with:
           label_name: 'merged in develop'
           target_branch: 'develop'
@@ -41,11 +41,40 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Merge to uat branch
-        uses: devmasx/merge-branch@v1.1.0
+      - name: Merge staging -> uat
+        uses: devmasx/merge-branch@v1.2.0
         with:
           type: now
-          target_branch: 'uat'
+          target_branch: uat
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+```
+
+```yaml
+name: Sync multiple branch
+on:
+  push:
+    branches:
+      - '*'
+jobs:
+  sync-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Merge development -> staging
+        uses: devmasx/merge-branch@v1.2.0
+        with:
+          type: now
+          head_to_merge: development
+          target_branch: staging
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Merge staging -> uat
+        uses: devmasx/merge-branch@v1.2.0
+        with:
+          type: now
+          head_to_merge: staging
+          target_branch: uat
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 ```
