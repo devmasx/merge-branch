@@ -12,6 +12,9 @@ inputs:
   target_branch:
     description: 'The name of target branch to merge'
     required: true
+  head_to_merge:
+    description: 'The branch name or hash to merge. default GITHUB_SHA'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
