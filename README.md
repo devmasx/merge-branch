@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+
       - name: Merge by labeled
         uses: devmasx/merge-branch@v1.2.0
         with:
@@ -41,6 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+
       - name: Merge staging -> uat
         uses: devmasx/merge-branch@v1.2.0
         with:
@@ -61,6 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+
       - name: Merge development -> staging
         uses: devmasx/merge-branch@v1.2.0
         with:
@@ -69,6 +72,7 @@ jobs:
           target_branch: staging
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
       - name: Merge staging -> uat
         uses: devmasx/merge-branch@v1.2.0
         with:
