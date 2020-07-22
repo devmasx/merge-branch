@@ -1,3 +1,7 @@
+## v1.4.0
+
+- Add input github_token, read github token from inputs.
+
 ## v1.2.0
 
 - Add input from_branch, perform a git merge for any branch combination.
