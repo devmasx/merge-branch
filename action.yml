@@ -1,5 +1,5 @@
 name: 'Merge branch'
-description: 'A GitHub Action that merge PR branch to other branchs'
+description: 'A GitHub Action that manage git merge for any gitflow'
 author: Miguel Savignano
 inputs:
   type:
@@ -18,6 +18,9 @@ inputs:
   head_to_merge:
     description: 'The branch name or hash to merge. default GITHUB_SHA'
     required: false
+  github_token:
+    description: 'Github token'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'

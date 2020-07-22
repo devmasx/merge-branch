@@ -24,8 +24,7 @@ jobs:
           type: now
           from_branch: development
           target_branch: staging
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          github_token: ${{ github.token }}
 
       - name: Merge staging -> uat
         uses: devmasx/merge-branch@v1.2.0
@@ -33,8 +32,7 @@ jobs:
           type: now
           from_branch: staging
           target_branch: uat
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          github_token: ${{ github.token }}
 ```
 
 ### Merge current branch
@@ -56,8 +54,7 @@ jobs:
         with:
           type: now
           target_branch: uat
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          github_token: ${{ github.token }}
 ```
 
 ### On labeled
@@ -85,6 +82,5 @@ jobs:
         with:
           label_name: 'merged in develop'
           target_branch: 'develop'
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          github_token: ${{ github.token }}
 ```
