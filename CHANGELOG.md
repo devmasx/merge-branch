@@ -1,6 +1,6 @@
 ## v1.2.0
 
-- Add input head_to_merge, perform a git merge for any branch combination.
+- Add input from_branch, perform a git merge for any branch combination.
 
 ## v1.1.1
 
