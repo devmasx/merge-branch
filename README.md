@@ -22,7 +22,7 @@ jobs:
         uses: devmasx/merge-branch@v1.3.0
         with:
           type: now
-          from_branch: development
+          head_to_merge: development
           target_branch: staging
           github_token: ${{ github.token }}
 
@@ -30,7 +30,7 @@ jobs:
         uses: devmasx/merge-branch@v1.3.0
         with:
           type: now
-          from_branch: staging
+          head_to_merge: staging
           target_branch: uat
           github_token: ${{ github.token }}
 ```
