@@ -7,6 +7,8 @@ require_relative './services/merge_branch_service'
 @repository = ENV['GITHUB_REPOSITORY']
 @github_token = ENV['INPUT_GITHUB_TOKEN'] || ENV['GITHUB_TOKEN']
 
+puts "@head_to_merge: #{@head_to_merge}, empty: #{@head_to_merge == ''}"
+
 inputs = {
   type: ENV['INPUT_TYPE'] || MergeBrachService::TYPE_LABELED, # labeled | comment | now
   label_name: ENV['INPUT_LABEL_NAME'],
