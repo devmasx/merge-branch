@@ -12,7 +12,7 @@ end
 @repository = ENV['GITHUB_REPOSITORY']
 @github_token = presence(ENV['INPUT_GITHUB_TOKEN']) || ENV['GITHUB_TOKEN']
 
-puts "@head_to_merge: #{@head_to_merge}, empty string: #{@head_to_merge == ''}, default: #{ENV['GITHUB_SHA']}"
+puts "@head_to_merge: #{@head_to_merge}, empty string: #{ENV['INPUT_HEAD_TO_MERGE'] == ''}, default: #{ENV['GITHUB_SHA']}"
 
 inputs = {
   type: ENV['INPUT_TYPE'] || MergeBrachService::TYPE_LABELED, # labeled | comment | now
