@@ -1,3 +1,7 @@
+## v1.3.1
+
+- Fix, check inputs with empty string values.
+
 ## v1.3.0
 
 - Add input github_token, read github token from inputs.
