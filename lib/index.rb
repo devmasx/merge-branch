@@ -1,6 +1,7 @@
 require 'json'
 require 'octokit'
 require_relative './services/merge_branch_service'
+require_relative './check_commit'
 
 def presence(value)
   return nil if value == ""
