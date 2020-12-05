@@ -87,8 +87,12 @@ jobs:
 
 ### Check merged branch
 
+Set label merge in staging on Pull request.
+
+Run workflow on staging branch, this workflow check if the `GITHUB_SHA` have a pull request, and add the label 'merged-in-staging'.
+
 ```yaml
-name: Label merged branch
+name: Set label on merged branch
 on:
   push:
     branches:
@@ -102,6 +106,7 @@ jobs:
       - name: check merge in staging
         uses: devmasx/merge-branch@v1.3.1
         with:
-          type: 'label-merged'
+          type: 'merged-label'
+          label_name: merged-in-staging
           github_token: ${{ github.token }}
 ```
