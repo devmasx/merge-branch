@@ -9,18 +9,23 @@ class LabelMergedBranchService
   end
 
   def run
-    all_commits = @client.commits(@repo, @sha)
+    create_label(find_pull_request)
+  end
+
+  def find_pull_request
+    all_commits = @client.commits(@repo, @commit_sha)
     if is_merged_commit?(all_commits.first)
-      sha_commit = all_commits[1].sha
+      commit_sha = all_commits[1].sha
+      # puts "Real commit (no merge) #{commit_sha}"
     end
 
     pull_requests = @client.pull_requests(@repo, :state => 'open')
-    if pull_request = pull_requests.find{ |item| sha_commit == item.head.sha }
-      puts "Create label #{@label_name} on #{pull_request.number}"
-      @client.add_labels_to_an_issue(@repo, pull_request.number, [@label_name])
-    else
-      puts "No pull request found"
-    end
+    pull_requests&.find{ |item| commit_sha == item.head.sha }
+  end
+
+  def create_label(pull_request)
+    puts "Create label #{@label_name} on #{pull_request.number}"
+    @client.add_labels_to_an_issue(@repo, pull_request.number, [@label_name])
   end
 
   def is_merged_commit?(commit)
