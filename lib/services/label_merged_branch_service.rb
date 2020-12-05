@@ -12,6 +12,7 @@ class LabelMergedBranchService
     all_commits = @client.commits(@repo, @sha)
     if is_merged_commit?(all_commits.first)
       sha_commit = all_commits[1].sha
+      puts "Real commit (no merge) #{sha_commit}"
     end
 
     pull_requests = @client.pull_requests(@repo, :state => 'open')
