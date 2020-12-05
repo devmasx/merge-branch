@@ -11,7 +11,7 @@ inputs:
     required: false
   target_branch:
     description: 'The name of target branch to merge'
-    required: true
+    required: false
   from_branch:
     description: 'Alias head_to_merge input'
     required: false
