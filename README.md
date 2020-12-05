@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Merge development -> staging
-        uses: devmasx/merge-branch@v1.3.0
+        uses: devmasx/merge-branch@v1.3.1
         with:
           type: now
           from_branch: development
@@ -27,7 +27,7 @@ jobs:
           github_token: ${{ github.token }}
 
       - name: Merge staging -> uat
-        uses: devmasx/merge-branch@v1.3.0
+        uses: devmasx/merge-branch@v1.3.1
         with:
           type: now
           from_branch: staging
@@ -50,7 +50,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Merge staging -> uat
-        uses: devmasx/merge-branch@v1.3.0
+        uses: devmasx/merge-branch@v1.3.1
         with:
           type: now
           target_branch: uat
@@ -78,9 +78,35 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Merge by labeled
-        uses: devmasx/merge-branch@v1.3.0
+        uses: devmasx/merge-branch@v1.3.1
         with:
           label_name: 'merged in develop'
           target_branch: 'develop'
+          github_token: ${{ github.token }}
+```
+
+### Check merged branch
+
+Set label merge in staging on Pull request.
+
+Run workflow on staging branch, this workflow check if the `GITHUB_SHA` have a pull request, and add the label 'merged-in-staging'.
+
+```yaml
+name: Set label on merged branch
+on:
+  push:
+    branches:
+      - 'staging'
+jobs:
+  merge-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: check merge in staging
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: 'merged-label'
+          label_name: merged-in-staging
           github_token: ${{ github.token }}
 ```
