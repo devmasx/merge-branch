@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MergeBrachService
   attr_reader :inputs, :event
 

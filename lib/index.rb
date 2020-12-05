@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'octokit'
 require_relative './services/merge_branch_service'
-require_relative './check_commit'
+require_relative './services/label_merged_branch_service'
 
 def presence(value)
   return nil if value == ""

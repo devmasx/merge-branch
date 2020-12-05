@@ -84,3 +84,24 @@ jobs:
           target_branch: 'develop'
           github_token: ${{ github.token }}
 ```
+
+### Check merged branch
+
+```yaml
+name: Label merged branch
+on:
+  push:
+    branches:
+      - 'staging'
+jobs:
+  merge-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: check merge in staging
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: 'label-merged'
+          github_token: ${{ github.token }}
+```
