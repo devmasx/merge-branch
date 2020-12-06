@@ -87,9 +87,9 @@ jobs:
 
 ### Check merged branch
 
-Set label merge in staging on Pull request.
+Assign label to pull request merged in another branch.
 
-Run workflow on staging branch, this workflow check if the `GITHUB_SHA` have a pull request, and add the label 'merged-in-staging'.
+Run workflow on staging branch, this workflow check if the `GITHUB_SHA` have a pull request, and assign the label 'merged-in-staging' and create a check-run in the merged commit.
 
 ```yaml
 name: Set label on merged branch
