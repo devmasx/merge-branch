@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+require_relative '../constans'
+
 class MergeBrachService
   attr_reader :inputs, :event
-
-  TYPE_LABELED = "labeled".freeze
-  TYPE_NOW = "now".freeze
+  include Constans
 
   def self.validate_inputs!(target_branch:, type:, label_name:)
     raise "Invalid type" unless [TYPE_LABELED, TYPE_NOW].include?(type)
