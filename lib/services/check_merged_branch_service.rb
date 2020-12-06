@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class LabelMergedBranchService
+class CheckMergedBranchService
   CHECK_BASE_NAME = "merge-branch"
 
   def initialize(client, sha:, label_name:, repo:)
