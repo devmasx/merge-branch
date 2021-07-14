@@ -7,6 +7,10 @@ def presence(value)
   value
 end
 
+Octokit.configure do |c|
+  c.api_endpoint = ENV['GITHUB_API_URL']
+end
+
 @event = JSON.parse(File.read(ENV['GITHUB_EVENT_PATH']))
 @head_to_merge = presence(ENV['INPUT_HEAD_TO_MERGE']) || presence(ENV['INPUT_FROM_BRANCH']) || presence(ENV['GITHUB_SHA']) # or brach name
 @repository = ENV['GITHUB_REPOSITORY']
