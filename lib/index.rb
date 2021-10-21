@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'octokit'
+require_relative './constans'
 require_relative './services/merge_branch_service'
+require_relative './services/check_merged_branch_service'
 
 def presence(value)
   return nil if value == ""
@@ -17,18 +21,26 @@ end
 @github_token = presence(ENV['INPUT_GITHUB_TOKEN']) || presence(ENV['GITHUB_TOKEN'])
 
 inputs = {
-  type: presence(ENV['INPUT_TYPE']) || MergeBrachService::TYPE_LABELED, # labeled | comment | now
+  type: presence(ENV['INPUT_TYPE']) || Constans::TYPE_LABELED,
   label_name: ENV['INPUT_LABEL_NAME'],
   target_branch: ENV['INPUT_TARGET_BRANCH']
 }
 
-MergeBrachService.validate_inputs!(inputs)
-service = MergeBrachService.new(inputs, @event)
-
-if service.valid?
-  @client = Octokit::Client.new(access_token: @github_token)
-  @client.merge(@repository, inputs[:target_branch], @head_to_merge)
-  puts "Finish merge branch to #{inputs[:target_branch]}"
+@client = Octokit::Client.new(access_token: @github_token)
+if inputs[:type] == Constans::TYPE_MERGED_LABEL
+  LabelMergedBranchService.new(@client, {
+    sha: @head_to_merge,
+    label_name: inputs[:label_name],
+    repo: @repository
+  }).run
 else
-  puts 'Skip'
+  MergeBrachService.validate_inputs!(inputs)
+  service = MergeBrachService.new(inputs, @event)
+
+  if service.valid?
+    @client.merge(@repository, inputs[:target_branch], @head_to_merge)
+    puts "Finish merge branch to #{inputs[:target_branch]}"
+  else
+    puts 'Skip'
+  end
 end
