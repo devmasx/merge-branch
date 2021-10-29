@@ -21,6 +21,9 @@ inputs:
   github_token:
     description: 'Github token'
     required: true
+  message:
+    description: 'Commit message'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
