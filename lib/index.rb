@@ -31,5 +31,5 @@ if service.valid?
   @client.merge(@repository, inputs[:target_branch], @head_to_merge, ENV['INPUT_MESSAGE'] ? {commit_message: ENV['INPUT_MESSAGE']} : {})
   puts "[merge-branch] Finish merge branch to #{inputs[:target_branch]}"
 else
-  puts "[merge-branch] Skip target_branch: #{inputs[:target_branch]} @head_to_merge: #{@head_to_merge}"
+  puts "[merge-branch] Neutral skip merge target_branch: #{inputs[:target_branch]} @head_to_merge: #{@head_to_merge}"
 end
