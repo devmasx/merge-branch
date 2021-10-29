@@ -33,6 +33,30 @@ describe MergeBrachService do
       end
     end
 
+    context "with empty label name" do
+      let(:label_name) { '' }
+
+      it ".validate_inputs!" do
+        expect { MergeBrachService.validate_inputs!(inputs) }.to raise_error()
+      end
+    end
+
+    context "with invalid target branch" do
+      let(:target_branch) { nil }
+
+      it ".validate_inputs!" do
+        expect { MergeBrachService.validate_inputs!(inputs) }.to raise_error()
+      end
+    end
+
+    context "with empty target branch" do
+      let(:target_branch) { '' }
+
+      it ".validate_inputs!" do
+        expect { MergeBrachService.validate_inputs!(inputs) }.to raise_error()
+      end
+    end
+
     context "not match label" do
       let(:event) { { 'action' => 'labeled', 'label' => { 'name' => 'other label' } } }
 
