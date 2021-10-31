@@ -21,6 +21,7 @@ inputs = {
   label_name: ENV['INPUT_LABEL_NAME'],
   target_branch: ENV['INPUT_TARGET_BRANCH']
 }
+
 MergeBrachService.validate_inputs!(inputs)
 service = MergeBrachService.new(inputs, @event)
 
