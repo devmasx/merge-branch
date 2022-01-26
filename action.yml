@@ -24,6 +24,9 @@ inputs:
   message:
     description: 'Commit message'
     required: false
+  disable_fastforwards:
+    description: 'Does not merge the branch if no files have been changed'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
