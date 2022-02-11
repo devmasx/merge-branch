@@ -27,9 +27,18 @@ service = MergeBrachService.new(inputs, @event)
 
 if service.valid?
   @client = Octokit::Client.new(access_token: @github_token)
-  puts "Running perform merge target_branch: #{inputs[:target_branch]} @head_to_merge: #{@head_to_merge}}"
-  @client.merge(@repository, inputs[:target_branch], @head_to_merge, ENV['INPUT_MESSAGE'] ? {commit_message: ENV['INPUT_MESSAGE']} : {})
-  puts "Completed: Finish merge branch #{@head_to_merge} to #{inputs[:target_branch]}"
+
+  page_number = 1
+  while (page = @client.branches(@repository, page: page_number)).length.positive?
+    page.each do |branch|
+      if branch.name.match?(inputs[:target_branch])
+        puts "Running perform merge target_branch: #{branch.name} @head_to_merge: #{@head_to_merge}}"
+        @client.merge(@repository, branch.name, @head_to_merge, ENV['INPUT_MESSAGE'] ? {commit_message: ENV['INPUT_MESSAGE']} : {})
+        puts "Completed: Finish merge branch #{@head_to_merge} to #{inputs[:target_branch]}"
+      end
+    end
+    page_number += 1
+  end
 else
   puts "Neutral: skip merge target_branch: #{inputs[:target_branch]} @head_to_merge: #{@head_to_merge}"
 end
