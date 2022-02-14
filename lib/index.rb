@@ -34,7 +34,7 @@ if service.valid?
       if branch.name.match?(inputs[:target_branch])
         puts "Running perform merge target_branch: #{branch.name} @head_to_merge: #{@head_to_merge}}"
         @client.merge(@repository, branch.name, @head_to_merge, ENV['INPUT_MESSAGE'] ? {commit_message: ENV['INPUT_MESSAGE']} : {})
-        puts "Completed: Finish merge branch #{@head_to_merge} to #{inputs[:target_branch]}"
+        puts "Completed: Finish merge branch #{@head_to_merge} to #{branch.name}"
       end
     end
     page_number += 1
