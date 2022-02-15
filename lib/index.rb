@@ -38,14 +38,11 @@ if service.valid?
         puts "Running perform merge target_branch: #{branch.name} @head_to_merge: #{@head_to_merge}}"
 
         begin
-          if @client.merge(@repository, branch.name, @head_to_merge, ENV['INPUT_MESSAGE'] ? {commit_message: ENV['INPUT_MESSAGE']} : {})&.key?(sha)
-            puts "Completed: Finish merge branch #{@head_to_merge} to #{branch.name}"
-            merge_success << branch.name
-          else
-            puts "Error: Failed to merge branch #{@head_to_merge} to #{branch.name}"
-            merge_failure << branch.name
-          end
-        rescue StandardError
+          @client.merge(@repository, branch.name, @head_to_merge, ENV['INPUT_MESSAGE'] ? {commit_message: ENV['INPUT_MESSAGE']} : {})
+          puts "Completed: Finish merge branch #{@head_to_merge} to #{branch.name}"
+          merge_success << branch.name
+        rescue StandardError => exc
+          puts "#{exc.class} - #{exc.message}"
           puts "Error: Failed to merge branch #{@head_to_merge} to #{branch.name}"
           merge_failure << branch.name
         end
