@@ -37,10 +37,15 @@ if service.valid?
       if branch.name.match?(inputs[:target_branch])
         puts "Running perform merge target_branch: #{branch.name} @head_to_merge: #{@head_to_merge}}"
 
-        if @client.merge(@repository, branch.name, @head_to_merge, ENV['INPUT_MESSAGE'] ? {commit_message: ENV['INPUT_MESSAGE']} : {})&.key?(sha)
-          puts "Completed: Finish merge branch #{@head_to_merge} to #{branch.name}"
-          merge_success << branch.name
-        else
+        begin
+          if @client.merge(@repository, branch.name, @head_to_merge, ENV['INPUT_MESSAGE'] ? {commit_message: ENV['INPUT_MESSAGE']} : {})&.key?(sha)
+            puts "Completed: Finish merge branch #{@head_to_merge} to #{branch.name}"
+            merge_success << branch.name
+          else
+            puts "Error: Failed to merge branch #{@head_to_merge} to #{branch.name}"
+            merge_failure << branch.name
+          end
+        rescue StandardError
           puts "Error: Failed to merge branch #{@head_to_merge} to #{branch.name}"
           merge_failure << branch.name
         end
@@ -50,12 +55,12 @@ if service.valid?
   end
 
   # github uses an env file for passing values as environment variables between concurrent job steps
-  File.open(ENV['GITHUB_ENV'], 'a') do |env|
+  File.open(ENV['GITHUB_ENV'], 'a:UTF-8') do |env|
     env << "MERGE_SUCCESS=#{merge_success.join(', ')}"
     env << "MERGE_FAILURE=#{merge_failure.join(', ')}"
   end
 
-  return merge_failure.length.positive? ? 1 : 0
+  exit 1 if merge_failure.length.positive?
 else
   puts "Neutral: skip merge target_branch: #{inputs[:target_branch]} @head_to_merge: #{@head_to_merge}"
 end
