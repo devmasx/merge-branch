@@ -53,8 +53,8 @@ if service.valid?
 
   # github uses an env file for passing values as environment variables between concurrent job steps
   File.open(ENV['GITHUB_ENV'], 'a:UTF-8') do |env|
-    env << "MERGE_SUCCESS=#{merge_success.join(', ')}"
-    env << "MERGE_FAILURE=#{merge_failure.join(', ')}"
+    env.puts "MERGE_SUCCESS=#{merge_success.join(', ')}"
+    env.puts "MERGE_FAILURE=#{merge_failure.join(', ')}"
   end
 
   exit 1 if merge_failure.length.positive?
