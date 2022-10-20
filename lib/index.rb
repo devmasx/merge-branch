@@ -27,9 +27,15 @@ service = MergeBrachService.new(inputs, @event)
 
 if service.valid?
   @client = Octokit::Client.new(access_token: @github_token)
-  puts "Running perform merge target_branch: #{inputs[:target_branch]} @head_to_merge: #{@head_to_merge}}"
-  @client.merge(@repository, inputs[:target_branch], @head_to_merge, ENV['INPUT_MESSAGE'] ? {commit_message: ENV['INPUT_MESSAGE']} : {})
-  puts "Completed: Finish merge branch #{@head_to_merge} to #{inputs[:target_branch]}"
+
+  comparison = @client.compare(@repository, inputs[:target_branch], @head_to_merge)
+  if comparison.status == 'identical' && presence(ENV['INPUT_DISABLE_FASTFORWARDS']) && ENV['INPUT_DISABLE_FASTFORWARDS'] == "true"
+    puts "Neutral: skip fastforward merge target_branch: #{inputs[:target_branch]} @head_to_merge: #{@head_to_merge}"
+  else
+    puts "Running perform merge target_branch: #{inputs[:target_branch]} @head_to_merge: #{@head_to_merge}}"
+    @client.merge(@repository, inputs[:target_branch], @head_to_merge, ENV['INPUT_MESSAGE'] ? {commit_message: ENV['INPUT_MESSAGE']} : {})
+    puts "Completed: Finish merge branch #{@head_to_merge} to #{inputs[:target_branch]}"
+  end
 else
   puts "Neutral: skip merge target_branch: #{inputs[:target_branch]} @head_to_merge: #{@head_to_merge}"
 end
