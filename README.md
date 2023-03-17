@@ -24,7 +24,7 @@ jobs:
           type: now
           from_branch: development
           target_branch: staging
-          github_token: ${{ github.token }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Merge staging -> uat
         uses: devmasx/merge-branch@master
@@ -32,7 +32,7 @@ jobs:
           type: now
           from_branch: staging
           target_branch: uat
-          github_token: ${{ github.token }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ### Merge current branch
@@ -54,7 +54,30 @@ jobs:
         with:
           type: now
           target_branch: uat
-          github_token: ${{ github.token }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+### Merge current branch with commit message
+
+```yaml
+name: Merge any release branch to uat
+on:
+  push:
+    branches:
+      - 'release/*'
+jobs:
+  merge-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Merge staging -> uat
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          target_branch: uat
+          message: Merge staging into uat
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ### On labeled
@@ -82,5 +105,5 @@ jobs:
         with:
           label_name: 'merged in develop'
           target_branch: 'develop'
-          github_token: ${{ github.token }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
