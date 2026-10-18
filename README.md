@@ -15,6 +15,8 @@ on:
 jobs:
   sync-branch:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@master
 
@@ -46,6 +48,8 @@ on:
 jobs:
   merge-branch:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@master
 
@@ -68,6 +72,8 @@ on:
 jobs:
   merge-branch:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@master
 
@@ -97,6 +103,8 @@ on:
 jobs:
   merge-branch:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@master
 
